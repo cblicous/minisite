@@ -2,7 +2,12 @@ Minisite::Application.routes.draw do
 
   resources :entries
 
- root :to => "home#index"
+ root :to => "tags#show"
+    
+ match 'tags/:name' => 'tags#show'
+    
+ match 'tags/' => 'tags#show'
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -12,10 +12,7 @@
  *= require_tree .
 */
 
-* {
-	margin: 0;
-	padding: 0;
-}
+
 
 body {
 	margin: 20px;
@@ -48,6 +45,29 @@ a img:hover {
 	clear: both;
 }
 
+.imagebox {
+    position: relative;
+    width: 300px; 
+    height: 250px;
+    overflow : hidden;
+    
+}
+
+.textbox{
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+}
+
+.textbox {
+    color: white;
+    font: bold 24px/45px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
 
 #container {
 
@@ -55,33 +75,36 @@ width: 100%;
 }
 
 #tags {
-    margin-top: 20 px !important;
-    margin-bottom: 20 px !important;
+    margin-top: 20 px ;
+    margin-bottom: 20 px ;
 
 }
 
 #box {
-    width: 600px;
-    margin: 0 auto;
+    width: 608px;
     position: relative;
-    margin-top: 20 px;
-    top:5px; 
-    left:25px;
+    margin: 0px;    
+    padding-top : 10 px;
+    top:40px; 
+    left:100px;
     background-color:#FFFFFF; 
     min-height:200px; 
 }
 
 #title {
-width: 100%;
-height: 100px;
+    width: 100%;
+    height: 100px;
 }
 
 #title h1#logo {
-display: block;
-width: 460px;
-height: 81px;
-float: left;
+    display: block;
+    width: 460px;
+    height: 81px;
+    float: left;
 }
+
+
+
 
 img.bg {
     /* Set rules to fill background */
@@ -108,6 +131,7 @@ img.bg {
     background: transparent url(../img/transparency_darkgrey.png);
     position: relative;
     width: 900px; 
+    min-height: 600px; 
     margin: 50px auto; 
     padding: 20px; 
 }

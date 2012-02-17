@@ -1,28 +1,49 @@
+=begin
+#Deprecated
 <% @uniqueTags = Tag.find(:all, :select => 'DISTINCT name') %>
 <div id="tags">
 <% @uniqueTags.each do |entry| %>
-<a href=""> <%= entry.name %> </a>
-
-
-
+    <a href=""><%= entry.name %></a>,
 <% end %>
 	
 </div>
 <div id="container" > 
 <div id="box">	
-<h1>Hello, Rails!</h1>
 
-<%= link_to "My Curriculum", entries_path %>
+<%= link_to "Adminview", entries_path %>
 
 <table>
 
-<% @entries.each do |entry| %>
-  <tr>
-    <td><%= entry.name %></td>
-    <td><%= entry.title %></td>
-    <td><%= entry.content %></td>
-   
-  </tr>
+<% if @entries.size % 2 != 0
+        playholderEntry = Entry.new
+        playholderEntry.name = "..."
+        playholderEntry.title = "..."
+        @entries.push playholderEntry
+    end
+
+%>
+<% @entries.each_with_index do |entry,index| %>
+    <% if index % 2 == 0 %>
+    <tr>
+    <%end %>
+    
+        <td >
+            <div class="imagebox">
+            <% if entry.image_url(:thumb) != nil %>
+              <%= image_tag entry.image_url(:thumb) if entry.image? %>
+            <%  else %>
+              <%= entry.content %>
+            <% end %>
+            <span class="textbox">
+            <%= entry.name %>  
+            <%= entry.title %>
+            </span>
+            </div>
+
+        </td>
+        <% if index % 2 != 0 %>
+        </tr>
+        <%end %>
 <% end %>
 </table>
 
@@ -30,3 +51,4 @@
 </div>
 </div>
 </div>
+=end

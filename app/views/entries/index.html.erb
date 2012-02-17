@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Title</th>
     <th>Content</th>
+    <th>Image</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +15,15 @@
   <tr>
     <td><%= entry.name %></td>
     <td><%= entry.title %></td>
-    <td><%= entry.content %></td>
+    <td><%= entry.content[0..50] %></td>
+    <td><%if entry.image_url != nil %>
+            <%= "yes" %>
+        <% else %>
+           <%= "no" %>
+        <% end %>
+    </td>
+
+
     <td><%= link_to 'Show', entry %></td>
     <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
     <td><%= link_to 'Destroy', entry, :confirm => 'Are you sure?', :method => :delete %></td>
