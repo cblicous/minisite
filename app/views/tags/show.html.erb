@@ -1,0 +1,102 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+	/* This is basic - uses default settings */
+	
+	$("a.single_image").fancybox();
+	
+	/* Using custom settings */
+	
+	$("a.inline").fancybox({
+		'hideOnContentClick': true
+	});
+
+	/* Apply fancybox to multiple items */
+	
+	$("a.group").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'speedIn'		:	600, 
+		'speedOut'		:	200, 
+		'overlayShow'	:	false
+	});
+	
+});
+</script>
+
+<% @uniqueTags = Tag.find(:all, :select => 'DISTINCT name') %>
+<div id="tags">
+<% @uniqueTags.each do |entry| %>
+<a href="/tags/<%= entry.name %>"><%= entry.name %></a>,
+<% end %>
+<a href="/tags/">all</a>
+</div>
+<div id="container" > 
+<div id="box">	
+
+<%= link_to "Adminview", entries_path %>
+
+<table>
+
+<% if @entries.size % 2 != 0
+	placeholderEntry = Entry.new
+	placeholderEntry.name = "..."
+	placeholderEntry.title = "..."
+	@entries.push placeholderEntry
+end
+
+%>
+<% @entries.each_with_index do |entry,index| %>
+<% if index % 2 == 0 %>
+	<tr>
+<%end %>
+
+<td >
+<div class="imagebox">
+	<% if entry.image_url(:thumb) != nil %>
+		<!-- <a class="single_image" href="<%= entry.image_url %>"> -->
+		<a class="inline" href="#data<%=index %>">
+		<%= image_tag entry.image_url(:thumb) if entry.image? %>
+	</a>
+<%  else %>
+		<a class="inline" href="#data<%=index %>">
+		<%= entry.content %>
+		</a>
+<% end %>
+<span class="textbox">
+<%= entry.name %>  
+<%= entry.title %>
+</span>
+</div>
+
+
+
+</td>
+<% if index % 2 != 0 %>
+	</tr>
+<%end %>
+
+<div style="display:none"><div id="data<%=index %>">
+		<% if entry.image_url(:thumb) != nil %>
+			<a class="single_image" href="<%= entry.image_url %>">
+				<%= image_tag entry.image_url() if entry.image? %>
+			</a>
+		<%  else %>
+			<%= entry.content %>
+		<% end %>
+	
+		<span class="textbox">
+			<%= entry.name %>  
+			<%= entry.title %>
+		</span>
+	</div>
+</div>
+
+
+<% end %>
+</table>
+
+
+</div>
+</div>
+</div>
